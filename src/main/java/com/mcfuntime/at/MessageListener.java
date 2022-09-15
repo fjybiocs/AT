@@ -25,17 +25,28 @@ public class MessageListener implements Listener {
         List<Player> desPlayerList = new ArrayList<Player>();
         // 查找每个片段中是否存在艾特
         for(String ss : arr){
-            if(ss.charAt(0) == '@' && ss.length() > 1){
-                String username = ss.substring(1);
-                Player desPlayer = Bukkit.getPlayer(username);
-                if(desPlayer == null){
-                    player.sendMessage("§c[交大助手] " + username + "不在线");
+            int startIndex = 0;
+
+            String [] usernames = ss.split("\\@+");
+            if(ss.indexOf(0) != '@'){
+                output.append(usernames[0]);
+                startIndex = 1;
+            }
+            for(int i=startIndex; i<usernames.length; i++) {
+                String username = usernames[i];
+                System.out.println(username);
+                if(username == null || username.length() == 0) {
+                    player.sendMessage("§c[交大助手] 请在@后输入你要艾特的玩家ID，不能加空格");
                 }else{
-                    desPlayerList.add(desPlayer);
-                    output.append("§b@").append(desPlayer.getName()).append("§f").append(" ");
+                    Player desPlayer = Bukkit.getPlayer(username);
+                    if(desPlayer == null){
+                        player.sendMessage("§c[交大助手] " + username + "不在线");
+                        output.append("@").append(username).append(" ");
+                    }else{
+                        desPlayerList.add(desPlayer);
+                        output.append("§b@").append(desPlayer.getName()).append("§f").append(" ");
+                    }
                 }
-            }else{
-                output.append(ss);
             }
         }
         // 给每个被艾特的玩家播放声音
