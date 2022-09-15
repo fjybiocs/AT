@@ -1,5 +1,5 @@
 # AT
-Your players can mention an online player in you server!
+Your players can mention an online player in you server! With highlighted mentioned username and sound reminder.
 
 ## Usage
 Just send message with `@username`, the `@username` will be highlited and the mentioned user will receive special sound remind.
