@@ -1,46 +1,57 @@
 package com.mcfuntime.at;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static org.bukkit.Sound.ENTITY_PLAYER_LEVELUP;
+import static org.bukkit.event.EventPriority.HIGHEST;
 
 public class MessageListener implements Listener {
 
-    @EventHandler(ignoreCancelled = true)
+    @EventHandler(ignoreCancelled = true, priority = HIGHEST)
     public void onPostMessage(AsyncPlayerChatEvent event) {
-        // 分割字符串，找出可能存在艾特玩家的片段
         String content = event.getMessage();
+
+        if(content.startsWith("@all") && event.getPlayer().isOp()){
+            event.setMessage("§b@all§f" + content.substring(4));
+            Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
+            for(Player p : onlinePlayers){
+                p.playSound(p, ENTITY_PLAYER_LEVELUP,1, 1);
+            }
+            return;
+        }
+
+        // split by blank space
         String [] arr = content.split("\\s+");
 
         Player player = event.getPlayer();
         StringBuilder output = new StringBuilder();
         List<Player> desPlayerList = new ArrayList<Player>();
-        // 查找每个片段中是否存在艾特
+        // find @
         for(String ss : arr){
             int startIndex = 0;
 
             String [] usernames = ss.split("\\@+");
             if(ss.indexOf(0) != '@'){
-                output.append(usernames[0]);
+                output.append(usernames[0]).append(" ");
                 startIndex = 1;
             }
             for(int i=startIndex; i<usernames.length; i++) {
                 String username = usernames[i];
                 System.out.println(username);
                 if(username == null || username.length() == 0) {
-                    player.sendMessage("§c[交大助手] 请在@后输入你要艾特的玩家ID，不能加空格");
+                    player.sendMessage("§c[AT] unknown user");
                 }else{
                     Player desPlayer = Bukkit.getPlayer(username);
                     if(desPlayer == null){
-                        player.sendMessage("§c[交大助手] " + username + "不在线");
+                        player.sendMessage("§c[AT] " + username + "is offline.");
                         output.append("@").append(username).append(" ");
                     }else{
                         desPlayerList.add(desPlayer);
@@ -49,9 +60,9 @@ public class MessageListener implements Listener {
                 }
             }
         }
-        // 给每个被艾特的玩家播放声音
+        // play sound for each player
         for(Player p : desPlayerList){
-            p.playSound(player, ENTITY_PLAYER_LEVELUP,1, 1);
+            p.playSound(p, ENTITY_PLAYER_LEVELUP,1, 1);
         }
         event.setMessage(output.toString());
     }
