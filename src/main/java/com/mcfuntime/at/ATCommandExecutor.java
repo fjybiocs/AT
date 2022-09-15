@@ -14,18 +14,18 @@ public class ATCommandExecutor implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if(sender instanceof Player) {
             Player player = ((Player) sender).getPlayer();
-            // 对指令进行预检查
+            // pre-check the command
             if(args.length == 0 || args[0] == null || args[0].length() == 0){
                 player.sendMessage("§c[AT] unknown user.");
                 return true;
             }
-            // 查找玩家
+            // search for the Player
             Player desPlayer = Bukkit.getPlayer(args[0]);
             if(desPlayer == null){
-                player.sendMessage("§c[交大助手] the user is offline.");
+                player.sendMessage("§c[AT] the user is offline.");
                 return true;
             }
-            // 执行提醒
+            // execute reminder
             player.chat( "@" + args[0]);
         }
         return true;
