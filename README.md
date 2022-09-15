@@ -6,7 +6,7 @@ Just send message with `@username`, the `@username` will be highlited and the me
 
 ## Fetures
 + multiple mention: you can mention multiple players in a single message, for example, `What are you guys doing?@TPam@fjybiocs`
-+ fuzzy matching: you don't need to type in the fullname of a user and don't need to be case sensitive. If you want to mention `TPam`, you can `@tpam`、`@tp` or something like that. But make sure that the user name you entered does not have obvious ambiguity.
++ fuzzy matching: you don't need to type in the fullname of a user and don't need to be case sensitive. If you want to mention `TPam`, you can `@tpam`、`@tp` or something like that. But make sure that the username you entered does not have obvious ambiguity.
 + `@all`, op can mention all the players via `@all`.
 
 ## Update Planning
