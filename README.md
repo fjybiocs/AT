@@ -1,9 +1,14 @@
 # AT
-安装后，玩家可以在服务器内@在线玩家，被@的玩家ID会在消息中高亮显示，被@的玩家将会收到声音提醒（mc原版中升级的声音）。
+Your players can mention an online player in you server!
 
-+ @玩家时，支持模糊匹配。
-例如要艾特`TPam`，即便只输入`@tp`，在没有明显歧义的情况下，消息中也会高亮显示`@TPam`，并发送声音提醒。
+## Usage
+Just send message with `@username`, the `@username` will be highlited and the mentioned user will receive special sound remind.
 
-+ 可以在同一条消息中连续@多人。
-例如`你们在哪呀@TPam@fjybiocs`，这条消息中两位玩家都能被成功艾特。
-使用时，只要保证每个ID都以`空格`或`'@'`结束即可。
+## Fetures
++ multiple mention: you can mention multiple players in a single message, for example, `What are you guys doing?@TPam@fjybiocs`
++ fuzzy matching: you don't need to type in the fullname of a user and don't need to be case sensitive. If you want to mention `TPam`, you can `@tpam`、`@tp` or something like that. But make sure that the user name you entered does not have obvious ambiguity.
++ `@all`, op can mention all the players via `@all`.
+
+## Update Planning
++ more configurable: for example, configurable permission node, configurable message, ect.
++ send `@` message from the console.
