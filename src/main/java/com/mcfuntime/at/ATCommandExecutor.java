@@ -16,13 +16,13 @@ public class ATCommandExecutor implements CommandExecutor {
             Player player = ((Player) sender).getPlayer();
             // 对指令进行预检查
             if(args.length == 0 || args[0] == null || args[0].length() == 0){
-                player.sendMessage("§c[交大助手] 命令错误，请输入/at 你要at的玩家id，例如/at TPam");
+                player.sendMessage("§c[AT] unknown user.");
                 return true;
             }
             // 查找玩家
             Player desPlayer = Bukkit.getPlayer(args[0]);
             if(desPlayer == null){
-                player.sendMessage("§c[交大助手] 你艾特的玩家不在线");
+                player.sendMessage("§c[交大助手] the user is offline.");
                 return true;
             }
             // 执行提醒
