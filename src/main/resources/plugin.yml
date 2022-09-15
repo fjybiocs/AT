@@ -1,0 +1,11 @@
+name: AT
+version: '${project.version}'
+main: com.mcfuntime.at.AT
+api-version: 1.19
+authors: [ TPam ]
+description: AT a player in the game.
+
+commands:
+  at:
+    description: 艾特一位在线的玩家，他将收到音效提醒
+    usage: /<command> 用户名，例如/<command> TPam
